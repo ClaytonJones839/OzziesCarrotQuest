@@ -2,18 +2,37 @@
 
 <head>
   <title>Dog Runner</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="./assets/stylesheets/style.css" rel="stylesheet">
   <script type="text/javascript" src="dist/main.js" charset="utf-8" defer></script>
 </head>
 
-<body>
+<body class="body">
   <div class="game-container">
-    <h1>Ozzie's Escape</h1>
-    <canvas id="dog-game" height="500" width="780">
-      <img 
-        src="https://ijcnlp2008.org/images/yard-clipart-feild-3.png"
-        className="background-image"/>
-    </canvas>
+    <h1 class="game-h1">Ozzie's Escape</h1>
+    <div class="game-middle">
+      <div class="middle-right">
+        <div class="instructions-top">
+          <div class="par1">
+            Ozzie has decided he deserves a snack, and he happens to love the 
+            neighbors carrots!</div>
+          <div class="par2">
+            Help Ozzie collect as many of carrots as he can by jumping over the
+            neighbors fences!
+          </div>
+        </div>
+        <div class="instructions-mid">
+          Instructions:
+        </div>
+        <ul class="instructions-bottom">
+          <li>Click to Jump</li>
+          <li>Avoid Fences</li>
+          <Li>Collect Carrots</Li>
+        </ul>
+      </div>
+      <canvas id="dog-game" height="500" width="780"></canvas>
+      <div class="middle-left"></div>
+    </div>
   </div>
 </body>
 

@@ -1,5 +1,5 @@
 .game-container {
-    /* background-color: lightcoral; */
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,8 +7,47 @@
     width: 100%;
     height: 100%;
 }
+.body {
+    background-color: slategrey;
+}
 
-/* .background-image {
-    width: 500px;
-    height: 780px;
-} */
+.game-h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.game-middle {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle-right, .middle-left {
+    width: 200px;
+    height: 500px;
+    border: 8px solid black;
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+}
+
+.instructions-top, .instructions-mid {
+    margin: 5px;
+}
+
+.instructions-top {
+    margin-bottom: 20px;
+}
+
+.instructions-bottom {
+    padding-left: 30px;
+}
+
+.instructions-mid {
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+.par1, .par2 {
+    margin: 4px;
+}
