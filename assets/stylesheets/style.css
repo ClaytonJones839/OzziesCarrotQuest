@@ -51,3 +51,8 @@
 .par1, .par2 {
     margin: 4px;
 }
+
+#dog-game {
+    border-top: 8px solid black;
+    border-bottom: 8px solid black;
+}
