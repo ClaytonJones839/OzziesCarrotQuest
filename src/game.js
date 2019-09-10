@@ -17,7 +17,7 @@ export default class DogRunner {
   restart() {
     this.running = false;
     this.score = 0;
-    this.Dog = new Dog(this.dimensions);
+    this.dog = new Dog(this.dimensions);
     this.level = new Level(this.dimensions);
 
     this.animate();
@@ -49,8 +49,8 @@ export default class DogRunner {
       this.restart();
     }
 
-    //we see if they have scored a point by passing a pipe
-    this.level.passedPipe(this.dog.bounds(), () => {
+    //we see if they have scored a point by passing a fence
+    this.level.passedFence(this.dog.bounds(), () => {
       this.score += 1;
       console.log(this.score);
     });

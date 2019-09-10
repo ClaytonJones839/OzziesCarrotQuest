@@ -1,9 +1,9 @@
 const CONSTANTS = {
-    PIPE_SPEED: 2,
-    GAP_HEIGHT: 150,
-    PIPE_WIDTH: 50,
+    FENCE_SPEED: 2,
+    GAP_HEIGHT: 450,
+    FENCE_WIDTH: 50,
     EDGE_BUFFER: 50,
-    PIPE_SPACING: 220,
+    FENCE_SPACING: 220,
     WARM_UP_SECONDS: 1
 };
 
@@ -11,42 +11,42 @@ export default class Level {
     constructor(dimensions) {
         this.dimensions = dimensions;
 
-        const firstPipeDistance =
+        const firstFenceDistance =
             this.dimensions.width +
-            (CONSTANTS.WARM_UP_SECONDS * 60 * CONSTANTS.PIPE_SPEED);
+            (CONSTANTS.WARM_UP_SECONDS * 60 * CONSTANTS.FENCE_SPEED);
 
-        this.pipes = [
-            this.randomPipe(firstPipeDistance),
-            this.randomPipe(firstPipeDistance + CONSTANTS.PIPE_SPACING),
-            this.randomPipe(firstPipeDistance + (CONSTANTS.PIPE_SPACING * 2)),
+        this.fences = [
+            this.randomFence(firstFenceDistance),
+            this.randomFence(firstFenceDistance + CONSTANTS.FENCE_SPACING),
+            this.randomFence(firstFenceDistance + (CONSTANTS.FENCE_SPACING * 2)),
         ];
     }
 
-    randomPipe(x) {
+    randomFence(x) {
         const heightRange = this.dimensions.height - (2 * CONSTANTS.EDGE_BUFFER) - CONSTANTS.GAP_HEIGHT;
         const gapTop = (Math.random() * heightRange) + CONSTANTS.EDGE_BUFFER;
-        const pipe = {
-            topPipe: {
+        const fence = {
+            // topFence: {
+            //     left: x,
+            //     right: CONSTANTS.FENCE_WIDTH + x,
+            //     top: 0,
+            //     bottom: gapTop
+            // },
+            bottomFence: {
                 left: x,
-                right: CONSTANTS.PIPE_WIDTH + x,
-                top: 0,
-                bottom: gapTop
-            },
-            bottomPipe: {
-                left: x,
-                right: CONSTANTS.PIPE_WIDTH + x,
+                right: CONSTANTS.FENCE_WIDTH + x,
                 top: gapTop + CONSTANTS.GAP_HEIGHT,
                 bottom: this.dimensions.height
             },
             passed: false
         };
-        return pipe
+        return fence
     }
 
     animate(ctx) {
         this.drawBackground(ctx);
-        this.movePipes();
-        this.drawPipes(ctx);
+        this.moveFences();
+        this.drawFences(ctx);
     }
 
     drawBackground(ctx) {
@@ -54,59 +54,59 @@ export default class Level {
         ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
     }
 
-    passedPipe(dog, callback) {
-        this.eachPipe((pipe) => {
-            if (pipe.topPipe.right < dog.left) {
-                if (!pipe.passed) {
-                    pipe.passed = true;
+    passedFence(dog, callback) {
+        this.eachFence((fence) => {
+            if (fence.bottomFence.right < dog.left) {
+                if (!fence.passed) {
+                    fence.passed = true;
                     callback();
                 }
             }
         });
     }
 
-    movePipes() {
-        this.eachPipe(function (pipe) {
-            pipe.topPipe.left -= CONSTANTS.PIPE_SPEED;
-            pipe.topPipe.right -= CONSTANTS.PIPE_SPEED;
-            pipe.bottomPipe.left -= CONSTANTS.PIPE_SPEED;
-            pipe.bottomPipe.right -= CONSTANTS.PIPE_SPEED;
+    moveFences() {
+        this.eachFence(function (fence) {
+            // fence.topFence.left -= CONSTANTS.FENCE_SPEED;
+            // fence.topFence.right -= CONSTANTS.FENCE_SPEED;
+            fence.bottomFence.left -= CONSTANTS.FENCE_SPEED;
+            fence.bottomFence.right -= CONSTANTS.FENCE_SPEED;
         });
 
-        //if a pipe has left the screen add a new one to the end
-        if (this.pipes[0].topPipe.right <= 0) {
-            this.pipes.shift();
-            const newX = this.pipes[1].topPipe.left + CONSTANTS.PIPE_SPACING;
-            this.pipes.push(this.randomPipe(newX));
+        //if a fence has left the screen add a new one to the end
+        if (this.fences[0].bottomFence.right <= 0) {
+            this.fences.shift();
+            const newX = this.fences[1].bottomFence.left + CONSTANTS.FENCE_SPACING;
+            this.fences.push(this.randomFence(newX));
         }
     }
 
-    drawPipes(ctx) {
-        this.eachPipe(function (pipe) {
+    drawFences(ctx) {
+        this.eachFence(function (fence) {
             ctx.fillStyle = "green";
 
-            //draw top pipe
+            // draw top fence
+            // ctx.fillRect(
+            //     fence.topFence.left,
+            //     fence.topFence.top,
+            //     CONSTANTS.FENCE_WIDTH,
+            //     fence.topFence.bottom - fence.topFence.top
+            // );
+            // draw bottom fence
             ctx.fillRect(
-                pipe.topPipe.left,
-                pipe.topPipe.top,
-                CONSTANTS.PIPE_WIDTH,
-                pipe.topPipe.bottom - pipe.topPipe.top
-            );
-            //draw bottom pipe
-            ctx.fillRect(
-                pipe.bottomPipe.left,
-                pipe.bottomPipe.top,
-                CONSTANTS.PIPE_WIDTH,
-                pipe.bottomPipe.bottom - pipe.bottomPipe.top
+                fence.bottomFence.left,
+                fence.bottomFence.top,
+                CONSTANTS.FENCE_WIDTH,
+                fence.bottomFence.bottom - fence.bottomFence.top
             );
         });
     }
 
-    eachPipe(callback) {
-        this.pipes.forEach(callback.bind(this));
+    eachFence(callback) {
+        this.fences.forEach(callback.bind(this));
     }
     //This method shall return true if the dog passed in is currently
-    //colliding with any pipe.
+    //colliding with any fence.
     collidesWith(dog) {
         //this function returns true if the the rectangles overlap
         const _overlap = (rect1, rect2) => {
@@ -121,11 +121,11 @@ export default class Level {
             return true;
         };
         let collision = false;
-        this.eachPipe((pipe) => {
+        this.eachFence((fence) => {
             if (
-                //check if the dog is overlapping (colliding) with either pipe
-                _overlap(pipe.topPipe, dog) ||
-                _overlap(pipe.bottomPipe, dog)
+                //check if the dog is overlapping (colliding) with either fence
+                // _overlap(fence.topFence, dog) ||
+                _overlap(fence.bottomFence, dog)
             ) { collision = true; }
         });
         return collision;

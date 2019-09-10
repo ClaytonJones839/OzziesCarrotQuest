@@ -6,7 +6,7 @@ const CONSTANTS = {
   DOG_HEIGHT:  30
 };
 
-export default class Bird {
+export default class Dog {
 
   constructor(dimensions) {
     this.dimensions = dimensions;
@@ -16,21 +16,21 @@ export default class Bird {
   }
 
   jump() {
-    //if this were a more realistic bird simulation, we would be adding to the velocity
+    //if this were a more realistic dog simulation, we would be adding to the velocity
     //instead of just assigning it outright
     //to make the experience more fun and 'bouncy' we just set it directly
     this.vel = -1 * CONSTANTS.RUN_SPEED;
   }
 
-  moveBird() {
-    //for each frame, the bird should move by it's current velocity
+  moveDog() {
+    //for each frame, the dog should move by it's current velocity
     //velocity is 'pixels per frame', so each frame it should update position by vel
     this.y += this.vel;
     //the acceleration of gravity is in pixels per second per second
     //so each second, it changes the velocity by whatever the gravity constant is
     this.vel += CONSTANTS.GRAVITY;
-    //we set a 'terminal velocity', a maximum speed the bird can travel
-    //this keeps the game from becoming too wild because the bird is moving too fast to control
+    //we set a 'terminal velocity', a maximum speed the dog can travel
+    //this keeps the game from becoming too wild because the dog is moving too fast to control
     if (Math.abs(this.vel) > CONSTANTS.TERMINAL_VEL) {
       //if the terminal velocity is exceeded, we set it to the terminal velicty
       if (this.vel > 0) {
