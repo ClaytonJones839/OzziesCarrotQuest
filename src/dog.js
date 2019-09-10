@@ -10,8 +10,8 @@ export default class Dog {
 
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width / 3;
-    this.y = this.dimensions.height / 2;
+    this.x = this.dimensions.width / 4;
+    this.y = this.dimensions.height / 1.25;
     this.vel = 0;
   }
 

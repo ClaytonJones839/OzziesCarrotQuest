@@ -75,7 +75,6 @@ export default class Level {
 
     drawFences(ctx) {
         this.eachFence(function (fence) {
-            // ctx.fillStyle = "grey";
             const fenceImage = new Image();
             fenceImage.src = "http://getdrawings.com/vectors/wood-grain-pattern-vector-23.jpg"
 
