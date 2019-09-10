@@ -1,10 +1,10 @@
 const CONSTANTS = {
     FENCE_SPEED: 2,
-    GAP_HEIGHT: 450,
+    GAP_HEIGHT: 250,
     FENCE_WIDTH: 50,
     EDGE_BUFFER: 50,
-    FENCE_SPACING: 220,
-    WARM_UP_SECONDS: 1
+    FENCE_SPACING: 400,
+    WARM_UP_SECONDS: 2
 };
 
 export default class Level {
@@ -26,12 +26,6 @@ export default class Level {
         const heightRange = this.dimensions.height - (2 * CONSTANTS.EDGE_BUFFER) - CONSTANTS.GAP_HEIGHT;
         const gapTop = (Math.random() * heightRange) + CONSTANTS.EDGE_BUFFER;
         const fence = {
-            // topFence: {
-            //     left: x,
-            //     right: CONSTANTS.FENCE_WIDTH + x,
-            //     top: 0,
-            //     bottom: gapTop
-            // },
             bottomFence: {
                 left: x,
                 right: CONSTANTS.FENCE_WIDTH + x,
@@ -50,8 +44,12 @@ export default class Level {
     }
 
     drawBackground(ctx) {
-        ctx.fillStyle = "skyblue";
-        ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
+        const image = new Image();
+        image.src = "https://www.123freevectors.com/wp-content/uploads/freevector/grass-sky-free-vector.jpg"
+        // ctx.drawImage(image, 100, 100)
+        ctx.drawImage(image, 0, 0, 1000, 500)
+        // ctx.fillStyle = "skyblue";
+        // ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
     }
 
     passedFence(dog, callback) {
@@ -67,13 +65,10 @@ export default class Level {
 
     moveFences() {
         this.eachFence(function (fence) {
-            // fence.topFence.left -= CONSTANTS.FENCE_SPEED;
-            // fence.topFence.right -= CONSTANTS.FENCE_SPEED;
             fence.bottomFence.left -= CONSTANTS.FENCE_SPEED;
             fence.bottomFence.right -= CONSTANTS.FENCE_SPEED;
         });
 
-        //if a fence has left the screen add a new one to the end
         if (this.fences[0].bottomFence.right <= 0) {
             this.fences.shift();
             const newX = this.fences[1].bottomFence.left + CONSTANTS.FENCE_SPACING;
@@ -83,16 +78,8 @@ export default class Level {
 
     drawFences(ctx) {
         this.eachFence(function (fence) {
-            ctx.fillStyle = "green";
+            ctx.fillStyle = "grey";
 
-            // draw top fence
-            // ctx.fillRect(
-            //     fence.topFence.left,
-            //     fence.topFence.top,
-            //     CONSTANTS.FENCE_WIDTH,
-            //     fence.topFence.bottom - fence.topFence.top
-            // );
-            // draw bottom fence
             ctx.fillRect(
                 fence.bottomFence.left,
                 fence.bottomFence.top,
@@ -105,16 +92,12 @@ export default class Level {
     eachFence(callback) {
         this.fences.forEach(callback.bind(this));
     }
-    //This method shall return true if the dog passed in is currently
-    //colliding with any fence.
+
     collidesWith(dog) {
-        //this function returns true if the the rectangles overlap
         const _overlap = (rect1, rect2) => {
-            //check that they don't overlap in the x axis
             if (rect1.left > rect2.right || rect1.right < rect2.left) {
                 return false;
             }
-            //check that they don't overlap in the y axis
             if (rect1.top > rect2.bottom || rect1.bottom < rect2.top) {
                 return false;
             }
@@ -123,8 +106,6 @@ export default class Level {
         let collision = false;
         this.eachFence((fence) => {
             if (
-                //check if the dog is overlapping (colliding) with either fence
-                // _overlap(fence.topFence, dog) ||
                 _overlap(fence.bottomFence, dog)
             ) { collision = true; }
         });
