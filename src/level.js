@@ -1,8 +1,8 @@
 const CONSTANTS = {
     FENCE_SPEED: 2,
     GAP_HEIGHT: 250,
-    FENCE_WIDTH: 50,
-    EDGE_BUFFER: 50,
+    FENCE_WIDTH: 40,
+    EDGE_BUFFER: 10,
     FENCE_SPACING: 400,
     WARM_UP_SECONDS: 2
 };
@@ -46,10 +46,7 @@ export default class Level {
     drawBackground(ctx) {
         const image = new Image();
         image.src = "https://www.123freevectors.com/wp-content/uploads/freevector/grass-sky-free-vector.jpg"
-        // ctx.drawImage(image, 100, 100)
         ctx.drawImage(image, 0, 0, 1000, 500)
-        // ctx.fillStyle = "skyblue";
-        // ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
     }
 
     passedFence(dog, callback) {
@@ -78,9 +75,12 @@ export default class Level {
 
     drawFences(ctx) {
         this.eachFence(function (fence) {
-            ctx.fillStyle = "grey";
+            // ctx.fillStyle = "grey";
+            const fenceImage = new Image();
+            fenceImage.src = "http://getdrawings.com/vectors/wood-grain-pattern-vector-23.jpg"
 
-            ctx.fillRect(
+            ctx.drawImage(
+                fenceImage,
                 fence.bottomFence.left,
                 fence.bottomFence.top,
                 CONSTANTS.FENCE_WIDTH,
