@@ -41,10 +41,8 @@ export default class Dog {
 
   drawDog(ctx){
     const dogImage = new Image();
-    dogImage.src ="./assets/images/pinpng.com-running-png-482783.png"
+    dogImage.src ="./assets/images/Ozzie-pix1.png"
     ctx.drawImage(dogImage, this.x, this.y, 80, 60)
-    // ctx.fillStyle = "orange";
-    // ctx.fillRect(this.x, this.y, CONSTANTS.DOG_WIDTH, CONSTANTS.DOG_HEIGHT);
   }
 
   bounds() {
