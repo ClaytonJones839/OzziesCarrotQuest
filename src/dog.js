@@ -2,7 +2,7 @@ const CONSTANTS = {
   GRAVITY:  0.4,
   RUN_SPEED:  8,
   TERMINAL_VEL:  12,
-  DOG_WIDTH:  80,
+  DOG_WIDTH:  110,
   DOG_HEIGHT:  60
 };
 

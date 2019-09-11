@@ -8,7 +8,7 @@ const CONSTANTS = {
     EDGE_BUFFER: 5,
     FENCE_SPACING: 400,
     WARM_UP_SECONDS: 2,
-    CARROT_SPACING: 300,
+    CARROT_SPACING: 400,
 };
 
 export default class Level {
@@ -27,7 +27,7 @@ export default class Level {
 
         const firstCarrotDistance =
             this.dimensions.width +
-            (CONSTANTS.WARM_UP_SECONDS * 30 * CONSTANTS.FENCE_SPEED);
+            (CONSTANTS.WARM_UP_SECONDS * 2 * CONSTANTS.FENCE_SPEED);
 
         this.carrots = [
             this.randomCarrot(firstCarrotDistance),
