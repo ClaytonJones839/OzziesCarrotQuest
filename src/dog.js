@@ -11,7 +11,7 @@ export default class Dog {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 4;
-    this.y = 440;
+    this.y = 420;
     this.vel = 0;
   }
 
@@ -20,8 +20,8 @@ export default class Dog {
   }
 
   moveDog() {
-    if ( this.y > 440) {
-      this.y = 440
+    if ( this.y > 405) {
+      this.y = 405
     }
     this.y += this.vel;
     this.vel += CONSTANTS.GRAVITY;
@@ -40,9 +40,21 @@ export default class Dog {
   }
 
   drawDog(ctx){
-    const dogImage = new Image();
-    dogImage.src ="./assets/images/Ozzie-pix1.png"
-    ctx.drawImage(dogImage, this.x, this.y, 80, 60)
+
+    if (this.y < 405 && this.y >= 150) {
+      const dogImage = new Image();
+      dogImage.src = "./assets/images/Ozzie-pix2.png"
+      ctx.drawImage(dogImage, this.x, this.y, 120, 90)
+    } else if ( this.y < 150 ){
+      const dogImage = new Image();
+      dogImage.src = "./assets/images/Ozzie-pix3.png"
+      ctx.drawImage(dogImage, this.x, this.y, 120, 90)
+    } else {
+      const dogImage = new Image();
+      dogImage.src = "./assets/images/Ozzie-pix1.png"
+      ctx.drawImage(dogImage, this.x, this.y, 120, 90)
+    }
+
   }
 
   bounds() {

@@ -93,7 +93,7 @@ export default class Level {
         this.eachCarrot((carrot) => {
             if (carrot.bottomCarrot.left > dog.left && 
                 carrot.bottomCarrot.right < dog.right && 
-                dog.top > 440) {
+                dog.top > 400) {
                 if (!carrot.passed) {
                     carrot.passed = true;
                     callback();
