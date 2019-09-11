@@ -96,7 +96,8 @@ export default class Level {
                 dog.top > 400) {
                 if (!carrot.passed) {
                     carrot.passed = true;
-                    callback();
+                    carrot.bottomCarrot.top = 500;
+                    callback()
                 }
             }
         });

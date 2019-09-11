@@ -67,7 +67,7 @@ export default class DogRunner {
 
   drawScore() {
     const loc = { x: this.dimensions.width / 1.75, y: this.dimensions.height / 8 }
-    this.ctx.font = "25pt serif";
+    this.ctx.font = "25pt Arial";
     this.ctx.fillStyle = "black";
     this.ctx.fillText(`Carrots Collected: ${this.score}`, loc.x, loc.y);
     this.ctx.strokeStyle = "black";

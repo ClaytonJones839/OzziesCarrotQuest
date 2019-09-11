@@ -69,6 +69,10 @@
     object-fit: cover;
 }
 
-.top-par {
-    margin: 10px;
+.top-par, .bottom-par {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
