@@ -46,14 +46,14 @@ export default class DogRunner {
     this.dog.animate(this.ctx);
     if (this.gameOver()) {
         if (this.score === 0) {
-          alert(`Looks like you didn't pass any fences...`);
+          alert(`Oh no! You didn't get any carrots!`);
         } else {
-          alert(`Great Job! You passed ${this.score} fences!`);
+          alert(`Great Job! You collected ${this.score} carrots!`);
         }
       this.restart();
     }
 
-    this.level.passedFence(this.dog.bounds(), () => {
+    this.level.passedCarrot(this.dog.bounds(), () => {
       this.score += 1;
       console.log(this.score);
     });
@@ -69,9 +69,9 @@ export default class DogRunner {
     const loc = { x: this.dimensions.width / 1.75, y: this.dimensions.height / 8 }
     this.ctx.font = "25pt serif";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText(`Fences Passed: ${this.score}`, loc.x, loc.y);
+    this.ctx.fillText(`Carrots Collected: ${this.score}`, loc.x, loc.y);
     this.ctx.strokeStyle = "black";
     this.ctx.lineWidth = 2;
-    this.ctx.strokeText(`Fences Passed: ${this.score}`, loc.x, loc.y);
+    this.ctx.strokeText(`Carrots Collected: ${this.score}`, loc.x, loc.y);
   }
 }

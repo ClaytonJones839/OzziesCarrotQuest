@@ -1,10 +1,14 @@
 const CONSTANTS = {
     FENCE_SPEED: 2,
+    CARROT_SPEED: 2,
     GAP_HEIGHT: 250,
     FENCE_WIDTH: 40,
+    CARROT_WIDTH: 40,
+    CARROT_HEIGHT: 40,
     EDGE_BUFFER: 5,
     FENCE_SPACING: 400,
-    WARM_UP_SECONDS: 2
+    WARM_UP_SECONDS: 2,
+    CARROT_SPACING: 300,
 };
 
 export default class Level {
@@ -19,6 +23,16 @@ export default class Level {
             this.randomFence(firstFenceDistance),
             this.randomFence(firstFenceDistance + CONSTANTS.FENCE_SPACING),
             this.randomFence(firstFenceDistance + (CONSTANTS.FENCE_SPACING * 2)),
+        ];
+
+        const firstCarrotDistance =
+            this.dimensions.width +
+            (CONSTANTS.WARM_UP_SECONDS * 30 * CONSTANTS.FENCE_SPEED);
+
+        this.carrots = [
+            this.randomCarrot(firstCarrotDistance),
+            this.randomCarrot(firstCarrotDistance + CONSTANTS.CARROT_SPACING),
+            this.randomCarrot(firstCarrotDistance + (CONSTANTS.CARROT_SPACING * 2)),
         ];
     }
 
@@ -37,10 +51,25 @@ export default class Level {
         return fence
     }
 
+    randomCarrot(x) {
+        const carrot = {
+            bottomCarrot: {
+                left: x,
+                right: CONSTANTS.CARROT_WIDTH + x,
+                top: 455,
+                bottom: this.dimensions.height
+            },
+            passed: false
+        };
+        return carrot
+    }
+
     animate(ctx) {
         this.drawBackground(ctx);
         this.moveFences();
         this.drawFences(ctx);
+        this.moveCarrots();
+        this.drawCarrots(ctx);
     }
 
     drawBackground(ctx) {
@@ -60,6 +89,17 @@ export default class Level {
         });
     }
 
+    passedCarrot(dog, callback) {
+        this.eachCarrot((carrot) => {
+            if (carrot.bottomCarrot.right < dog.left) {
+                if (!carrot.passed) {
+                    carrot.passed = true;
+                    callback();
+                }
+            }
+        });
+    }
+
     moveFences() {
         this.eachFence(function (fence) {
             fence.bottomFence.left -= CONSTANTS.FENCE_SPEED;
@@ -70,6 +110,19 @@ export default class Level {
             this.fences.shift();
             const newX = this.fences[1].bottomFence.left + CONSTANTS.FENCE_SPACING;
             this.fences.push(this.randomFence(newX));
+        }
+    }
+
+    moveCarrots() {
+        this.eachCarrot(function (carrot) {
+            carrot.bottomCarrot.left -= CONSTANTS.FENCE_SPEED;
+            carrot.bottomCarrot.right -= CONSTANTS.FENCE_SPEED;
+        });
+
+        if (this.carrots[0].bottomCarrot.right <= 0) {
+            this.carrots.shift();
+            const newX = this.carrots[1].bottomCarrot.left + CONSTANTS.CARROT_SPACING;
+            this.carrots.push(this.randomCarrot(newX));
         }
     }
 
@@ -88,8 +141,27 @@ export default class Level {
         });
     }
 
+    drawCarrots(ctx) {
+        this.eachCarrot(function (carrot) {
+            const carrotImage = new Image();
+            carrotImage.src = "./assets/images/carrot.png"
+
+            ctx.drawImage(
+                carrotImage,
+                carrot.bottomCarrot.left,
+                carrot.bottomCarrot.top,
+                CONSTANTS.CARROT_WIDTH,
+                CONSTANTS.CARROT_HEIGHT,
+            );
+        });
+    }
+
     eachFence(callback) {
         this.fences.forEach(callback.bind(this));
+    }
+
+    eachCarrot(callback) {
+        this.carrots.forEach(callback.bind(this));
     }
 
     collidesWith(dog) {
