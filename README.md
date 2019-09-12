@@ -9,6 +9,6 @@ Ozzie's Escape is a javacript game featuring a dog named Ozzie as the main chara
 - CSS
 
 
-![Screenshot 1](./assets/images/screenshot1.png)
-![Screenshot 3](./assets/images/screenshot3.png)
+<!-- ![Screenshot 1](./assets/images/screenshot1.png) -->
+<!-- ![Screenshot 3](./assets/images/screenshot3.png) -->
 ![Screenshot 4](./assets/images/screenshot4.png)
