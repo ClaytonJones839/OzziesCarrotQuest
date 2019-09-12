@@ -2,11 +2,11 @@
   "name": "Dog_Runner",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack --watch --mode=development"
+    "webpack": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
