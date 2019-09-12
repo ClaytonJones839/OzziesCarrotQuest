@@ -20,6 +20,7 @@ Dog Runner is a javacript game features a dog as the main character whose goal i
 ![Screenshot 2](./assets/images/screenshot2.png)
 ![Screenshot 1](./assets/images/screenshot1.png)
 ![Screenshot 3](./assets/images/screenshot3.png)
+![Screenshot 4](./assets/images/screenshot4.png)
 
 
 You should have a working app at the end of each phase (even if not all of your features are in yet).
