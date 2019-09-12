@@ -1,4 +1,7 @@
-# Ozzie's Carrot Quest
+# [Ozzie's Carrot Quest](https://claytonjones839.github.io/OzziesCarrotQuest/)
+
+
+
 Ozzie's Carrot Quest is a javacript game featuring a dog named Ozzie as the main character. Ozzie's goal is to collect as many carrots as possible while also avoiding objects.
 
 ![Screenshot 2](./assets/images/screenshot2.png)
