@@ -1,5 +1,5 @@
 const CONSTANTS = {
-  GRAVITY:  0.3,
+  GRAVITY:  0.35,
   RUN_SPEED:  8,
   TERMINAL_VEL:  12,
   DOG_WIDTH:  110,
