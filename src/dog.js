@@ -1,9 +1,9 @@
 const CONSTANTS = {
-  GRAVITY:  0.4,
+  GRAVITY:  0.3,
   RUN_SPEED:  8,
   TERMINAL_VEL:  12,
   DOG_WIDTH:  110,
-  DOG_HEIGHT:  60
+  DOG_HEIGHT:  50
 };
 
 export default class Dog {

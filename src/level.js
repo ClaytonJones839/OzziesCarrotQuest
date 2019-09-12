@@ -5,7 +5,7 @@ const CONSTANTS = {
     FENCE_WIDTH: 40,
     CARROT_WIDTH: 40,
     CARROT_HEIGHT: 40,
-    EDGE_BUFFER: 5,
+    EDGE_BUFFER: 200,
     FENCE_SPACING: 400,
     WARM_UP_SECONDS: 2,
     CARROT_SPACING: 400,
@@ -64,17 +64,27 @@ export default class Level {
         return carrot
     }
 
-    animate(ctx) {
-        this.drawBackground(ctx);
+    animate(ctx, score) {
+        this.drawBackground(ctx, score);
         this.moveFences();
-        this.drawFences(ctx);
+        this.drawFences(ctx, score);
         this.moveCarrots();
         this.drawCarrots(ctx);
     }
 
-    drawBackground(ctx) {
+    drawBackground(ctx, score) {
         const image = new Image();
-        image.src = "https://www.123freevectors.com/wp-content/uploads/freevector/grass-sky-free-vector.jpg"
+        if (score < 5 ) {
+            image.src = "https://www.123freevectors.com/wp-content/uploads/freevector/grass-sky-free-vector.jpg"
+            // image.src = "./assets/images/Ozzie4.jpeg"
+        } else if (score >= 5 && score < 10) {
+            image.src = "http://clipart-library.com/newimages/city-clip-art-5.png"
+        } else {
+            image.src = "https://static.vecteezy.com/system/resources/previews/000/122/923/original/jungle-landscape-with-liana-hanging-vector.jpg"
+        }
+
+
+        
         ctx.drawImage(image, 0, 0, 1000, 500)
     }
 
@@ -129,10 +139,17 @@ export default class Level {
         }
     }
 
-    drawFences(ctx) {
+    drawFences(ctx, score) {
         this.eachFence(function (fence) {
             const fenceImage = new Image();
-            fenceImage.src = "http://getdrawings.com/vectors/wood-grain-pattern-vector-23.jpg"
+
+            if (score < 5) {
+                fenceImage.src = "./assets/images/wood.png"
+            } else if (score >= 5 && score < 10) {
+                fenceImage.src = "./assets/images/chain.png"
+            } else {
+                fenceImage.src = "./assets/images/snake.png"
+            }
 
             ctx.drawImage(
                 fenceImage,

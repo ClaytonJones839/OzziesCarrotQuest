@@ -42,7 +42,7 @@ export default class DogRunner {
   }
 
   animate() {
-    this.level.animate(this.ctx);
+    this.level.animate(this.ctx, this.score);
     this.dog.animate(this.ctx);
     if (this.gameOver()) {
         if (this.score === 0) {
