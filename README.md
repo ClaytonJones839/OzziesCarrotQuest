@@ -1,9 +1,10 @@
 # [Ozzie's Carrot Quest](https://claytonjones839.github.io/OzziesCarrotQuest/)
 
-## Technologies, Libraries, APIs
+## Technologies
 - Vanilla JS
 - HTML Canvas
 - CSS
+- Aesprite
 
 ## Summary
 
