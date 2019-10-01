@@ -7,9 +7,6 @@
 - Aesprite
 
 ## Summary
-
-
-## Summary
 Ozzie's Carrot Quest is a javacript game featuring a dog named Ozzie as the main character. Ozzie's goal is to collect as many carrots as possible while also avoiding objects.
 
 
