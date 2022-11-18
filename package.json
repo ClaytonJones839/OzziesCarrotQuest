@@ -21,7 +21,7 @@
   "homepage": "https://github.com/ClaytonJones839/DogRunner#readme",
   "devDependencies": {
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "lodash": "^4.17.15"
